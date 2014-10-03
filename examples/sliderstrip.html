@@ -5,59 +5,127 @@
         <title>Sliderstrip example</title>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"/>
         <link rel="stylesheet" href="../css/sliderstrip-example.css">
+        <style>
+            .module,
+            main{
+                margin: 1.25rem 2%;
+            }
+            .toggleText{
+                display: inline-block;
+            }
+            .toggleText:before{
+                content: "tl; dr.";
+            }
+            .toggleText.close ~ *{
+                display: none;
+            }
+            .toggleText.close:before{
+                content: "Wait, show me that text again.";
+            }
+            .useList{
+                margin: 1.25 0;
+                border: 1px solid black;
+            }
+        </style>
     </head>
     <body>
     <main>
+        <header>
+            <h2>Responsive Sliderstrip example</h2>
+        </header>
         <section>
-            <article class="sliderStrip">
+            <a class="toggleText" href="javascript:void(0);"></a>
+            <p>
+                This page is an example of how a responsive sliderstrip/carousel could work.
+                There are times when the client wants it to appear under certain viewport widths cases.
+                This uses the following:
+            </p>
+            <ul class="useList">
+                <li>CSS for layout and animation</li>
+                <li>jQuery and jQuery mobile (for touch events)</li>
+                <li>Ctrl (custom code I produced to trim down boilerplate code and abstraction)</li>
+                <li>SliderStrip (extends Ctrl)</li>
+                <li>PriorityEventBroadcaster (augmented Publish/Subscribe JS Pattern)</li>
+            </ul>
+            <p>
+                Note: Please do not request to use this code. I am still deviating a lot of the implementation
+                for better performance.
+            </p>
+        </section>
+        <section>
+            <article class="module sliderStrip">
+                <header>
+                    <h3 class="title">Sliderstrip with default config</h3>
+                </header>
                 <ul class="t3 w5"><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
+                  --><li class="item">&nbsp;</li><!--
+                  --><li class="item">&nbsp;</li><!--
+                  --><li class="item">&nbsp;</li><!--
+                  --><li class="item">&nbsp;</li><!--
+                  --><li class="item">&nbsp;</li><!--
+                  --><li class="item">&nbsp;</li><!--
+                  --><li class="item">&nbsp;</li><!--
+                  --><li class="item">&nbsp;</li><!--
+                  --><li class="item">&nbsp;</li><!--
+                  --><li class="item">&nbsp;</li><!--
             --></ul>
             </article><!--
-         --><article class="sliderStrip" data-module-configs='{"sliderStrip":{"mobile":{}, "web":null}}'>
-              <ul class="t2 w3"><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
+         --><article class="module sliderStrip" data-module-configs='{"sliderStrip":{"mobile":{}, "web":null}}'>
+                <header>
+                    <h3 class="title">Disable sliderstrip on web only</h3>
+                </header>
+                <ul class="t3 w4"><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
            --></ul>
             </article><!--
-         --><article class="sliderStrip" data-module-configs='{"sliderStrip":{"mobile":{},"tablet":null}}'>
-                <ul class="t2 w4"><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
-              --><li class="item">&nbsp;</li><!--
+         --><article class="module sliderStrip" data-module-configs='{"sliderStrip":{"mobile":{},"tablet":null}}'>
+                <header>
+                    <h3 class="title">Disable Sliderstrip on tablet view only</h3>
+                </header>
+                <ul class="t2 w5"><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
+                --><li class="item">&nbsp;</li><!--
             --></ul>
             </article>
         </section>
     </main>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="//derrid.us/js/libs/jquery.mobile.custom.min.js"></script><!--had to use a custom build because min.map kept trying to download -->
     <script src="../js/core/PriorityEventBroadcaster.js"></script>
     <script src="../js/core/utils.js"></script>
     <script src="../js/core/Ctrl.js"></script>
     <script src="../js/core/SliderStrip.js"></script>
+    <script>
+        (function ($) {
+            var $toggleText = $('.toggleText').on('tap', function() {
+                var isClosed = $(this).toggleClass('close').is('.close');
+
+                if (localStorage){
+                    localStorage.setItem('hideSliderDesc', isClosed);
+                }
+            });
+
+            if (localStorage && localStorage.getItem('hideSliderDesc') === 'true') {
+                $toggleText.trigger('tap');
+            }
+        }(jQuery));
+    </script>
     </body>
 </html>

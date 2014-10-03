@@ -419,7 +419,7 @@ var Ctrl = (function (W, $, PEB) {
         var me = this,
             peb = me._eventBroadcast;
 
-        $(document).ready(function () {
+        //$(document).ready(function () {
 
             if ($.type(peb) === 'object') {
                 $.each(peb, function (handleName, peb) {
@@ -436,7 +436,7 @@ var Ctrl = (function (W, $, PEB) {
                 //Only need to bind events once
                 delete me._eventBroadcast;
             }
-        });
+        //});
 
         return this;
     };
@@ -459,14 +459,14 @@ var Ctrl = (function (W, $, PEB) {
         var ThisCtrl = this,
             ctrlName = this.prototype._ctrlName;
 
-        $(document).ready(function () {
+        //$(document).ready(function () {
             $(el).each(function (i, e) {
                 var $e = $(e);
                 if (!$e.data(ctrlName + 'Ctrl')){
                     new ThisCtrl($e);
                 }
             });
-        });
+        //});
 
         return this;
     };
