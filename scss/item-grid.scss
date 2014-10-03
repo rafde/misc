@@ -1,0 +1,176 @@
+.item{
+  display: inline-block;
+  list-style: none;
+
+  &:after{
+    font-size: 1rem;
+  }
+}
+
+.item{
+  width: 98%;
+  border: 1px solid black;
+
+
+  &:after{
+    content: "m1 : 1";
+    width: 50%;
+    height: 50%;
+    display:block;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 8;
+    color: white;
+    background-color: black;
+  }
+
+  .sliderStrip &{
+    width: 9.8%;
+    margin-left: .2%;
+
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}
+
+@include media-tablet-plus{
+  .item{
+    margin-left: 2%;
+  }
+}
+
+@include media-tablet-only{
+
+  .t2{
+
+    .item{
+      width: 48%;
+
+      &:nth-child(2n+1){
+        margin-left: 0;
+
+        &:after{
+          content: "t2: 1";
+          background-color: red;
+        }
+      }
+
+      &:nth-of-type(2n+2):after{
+        content: "t2: 2";
+        background-color: blue;
+      }
+
+      .sliderStrip &{
+        width: 4.8%;
+      }
+    }
+  }
+
+  .t3{
+
+    .item{
+      width: 31.333%;
+
+      &:nth-child(3n+1){
+        margin-left: 0;
+
+        &:after{
+          content: "t3: 1";
+          background-color: red;
+        }
+      }
+
+      &:nth-of-type(3n+2):after{
+        content: "t3: 2";
+        background-color: blue;
+      }
+
+      &:nth-of-type(3n+3):after{
+        content: "t3: 3";
+        background-color: green;
+      }
+
+      .sliderStrip &{
+        width: 3.133%;
+      }
+    }
+  }
+}
+
+@include media-web-plus{
+  .w4{
+
+    .item{
+      width: 23%;
+
+      &:nth-child(4n+1){
+        margin-left: 0;
+
+        &:after{
+          content: "w4: 1";
+          background-color: red;
+        }
+      }
+
+      &:nth-of-type(4n+2):after{
+        content: "w4: 2";
+        background-color: blue;
+      }
+
+      &:nth-of-type(4n+3):after{
+        content: "w4: 3";
+        background-color: green;
+      }
+
+      &:nth-of-type(4n+4):after{
+        content: "w4: 4";
+        background-color: yellow;
+      }
+
+      .sliderStrip &{
+        width: 2.3%;
+      }
+    }
+  }
+
+  .w5{
+
+    .item{
+      width: 18%;
+
+      &:nth-child(5n+1){
+        margin-left: 0;
+
+        &:after{
+          content: "w5: 1";
+          background-color: red;
+        }
+      }
+
+      &:nth-of-type(5n+2):after{
+        content: "w5: 2";
+        background-color: blue;
+      }
+
+      &:nth-of-type(5n+3):after{
+        content: "w5: 3";
+        background-color: green;
+      }
+
+      &:nth-of-type(5n+4):after{
+        content: "w5: 4";
+        background-color: yellow;
+      }
+
+      &:nth-of-type(5n+5):after{
+        content: "w5: 5";
+        background-color: purple;
+      }
+
+      .sliderStrip &{
+        width: 1.8%;
+      }
+    }
+  }
+}

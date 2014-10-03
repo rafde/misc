@@ -1,0 +1,107 @@
+.sliderStrip{
+  //Support for up to 10 viewable items at a time;
+  //width 1000% = 100 scalable items, 1% width, 10% margin-left
+  //width 10000% = 1000 scalable items, .1% width, 1% margin-left
+  $maxWidth : 1000%;
+
+  .trackWrap{
+    position: relative;
+
+    > .prevPage,
+    > .nextPage{
+      position: absolute;
+      top:0;
+      bottom:0;
+      display: none;
+      width:4.625rem;
+      font-size:1rem;
+      z-index:10;
+
+      &.disabled,
+      &.disabled:after{
+        display:none;
+      }
+
+      &:after{
+        $arrowHeight: 3.3125rem;
+        position: absolute;
+        top: 50%;
+        display: inline-block;
+        height: $arrowHeight;
+        width: 1.0625rem;
+        padding: 0 10px;
+        margin-top: -($arrowHeight/2);
+        content: " ";
+        background-repeat: no-repeat;
+        background-size: 1.0625rem 2.0625rem;
+      }
+
+    }//> .prevPage,
+    //> .nextPage
+
+    > .prevPage{
+      left:0;
+
+      &:after{
+        left: 0;
+        background-position: .5em center;
+      }
+    }//> .prevPage
+
+    > .nextPage{
+      right: 0;
+
+      &:after{
+        right: 0;
+        background-position: .75em center;
+      }
+    }//> .nextPage
+
+    .no-touch &:hover{
+      > .prevPage,
+      > .nextPage{
+        display:inline-block;
+
+        &.disabled{
+          display:none;
+        }
+      }
+    }
+
+  }//.trackWrap
+
+  .slideTrack{
+    width: $maxWidth;
+    display: block;
+    margin: 0 auto;
+    font-size:0;
+
+    &:after,
+    &:before{
+      font-size: 1rem;
+      position: absolute;
+      content : " ";
+      width: 6%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    &:before{
+      left: -6%;
+    }
+
+    &:after{
+      right: -6%;
+    }
+
+  }//.slideTrack
+
+  &.slidingStrip .slideTrack > :first-child{
+    -webkit-transition: margin-left 500ms cubic-bezier(0, 0, 0.25, 1) 0s;
+    transition: margin-left 500ms cubic-bezier(0, 0, 0.25, 1) 0s;
+  }
+
+  .slidePage{
+    font-size: 1rem;
+  }
+}//.sliderStrip

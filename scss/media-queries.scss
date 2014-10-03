@@ -1,0 +1,36 @@
+//Assume base font-size is 16px. We get the actual size from the browsers' settings
+@mixin media-mobile-only {
+  @media screen and (max-width: 29.9375em) {
+    @content;
+  }
+}
+
+@mixin media-phablet-plus {
+  @media screen and (min-width: 30em) {
+    @content;
+  }
+}
+
+@mixin media-phablet-only {
+  @media screen and (min-width: 30em) and (max-width: 41.9375em) {
+    @content;
+  }
+}
+
+@mixin media-tablet-plus {
+  @media screen and (min-width: 42em) {
+    @content;
+  }
+}
+
+@mixin media-tablet-only {
+  @media screen and (min-width: 42em) and (max-width: 62.4375em) {
+    @content;
+  }
+}
+
+@mixin media-web-plus {
+  @media screen and (min-width: 62.5em) {
+    @content;
+  }
+}
