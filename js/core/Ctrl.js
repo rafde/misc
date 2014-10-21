@@ -1,8 +1,9 @@
 //Ctrl
-var Ctrl = (function (W, $, PEB) {
+/*global EventPriorityBroadcaster*/
+var Ctrl = (function (W, $, EPB) {
     'use strict';
 
-    PEB = PEB || function () {};
+    EPB = EPB || function () {};
 
     /**
      * @constructor Ctrl
@@ -122,7 +123,7 @@ var Ctrl = (function (W, $, PEB) {
     function eventBroadcast(eventTag, args) {
         if (eventTag && $.type(eventTag) === 'string' && args && $.type(args) === 'object') {
 
-            PEB(_returnEventName.apply(this, [eventTag]), {'args' : args});
+            EPB(_returnEventName.apply(this, [eventTag]), {'pub' : args});
         }
 
         return this;
@@ -260,10 +261,10 @@ var Ctrl = (function (W, $, PEB) {
         __delegateEvents.apply(this);
         __setupConfig.apply(this, [(config || {})]);
 
-        PEB('breakPoint', {
-            'repub' : true,
+        EPB('breakPoint', {
+            'rePub' : true,
             //Do not give this atag.
-            'callback': function (args) {
+            'sub': function (args) {
                 debugLog('Updating breakPoint config for: ' + me._ctrlName, me.getBpConfig(args.breakpoint));
 
                 if (me._bpConfig === null) {
@@ -427,8 +428,8 @@ var Ctrl = (function (W, $, PEB) {
 
                     if ($.type(peb) === 'array') {
                         $.each(peb, function (i, v) {
-                            if ($.type(v) === 'object' && $.type(v.callback) === 'function') {
-                                PEB(eventBroadcastName, v);
+                            if ($.type(v) === 'object' && $.type(v.sub) === 'function') {
+                                EPB(eventBroadcastName, v);
                             }
                         });
                     }
@@ -471,7 +472,7 @@ var Ctrl = (function (W, $, PEB) {
         return this;
     };
     /**
-     * @description Initializes PriorityEventNames and target elements. Only need to use once.
+     * @description Initializes EventPriorityNames and target elements. Only need to use once.
      * @public
      * @static
      * @param {string|jQuery|DOM} el target DOM element, selector, jQuery object, Array
@@ -487,4 +488,4 @@ var Ctrl = (function (W, $, PEB) {
     };
 
     return Ctrl;
-}(window, jQuery, PriorityEventBroadcaster));
+}(window, jQuery, EventPriorityBroadcaster));

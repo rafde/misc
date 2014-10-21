@@ -1,4 +1,5 @@
-(function (w, $, PEB) {
+/*global EventPriorityBroadcaster*/
+(function (w, $, EPB) {
     "use strict";
     var Prefs = {},
         debugLog = function () {
@@ -72,7 +73,7 @@
                     function (mql) {
                         if (mql.matches) {
                             debugLog('mediaQuery: ' + k);
-                            PEB('breakPoint', {
+                            EPB('breakPoint', {
                                 'args': {
                                     'breakpoint':  (curBP = k)
                                 }
@@ -82,7 +83,7 @@
                 );
 
                 if (p.BreakPointRanges.ranges[k].mediaQueryMatch.matches) {
-                    PEB('breakPoint', {
+                    EPB('breakPoint', {
                         'args': {
                             'breakpoint':  (curBP = k)
                         }
@@ -101,7 +102,7 @@
                     clearTimeout(rTimer);
                 }
                 rTimer = setTimeout(function () {
-                    PEB('windowResize');
+                    EPB('windowResize');
                 }, 150);
             },
             bouncedScroll = function () {
@@ -109,10 +110,10 @@
                     clearTimeout(sTimer);
                 }
                 sTimer = setTimeout(function () {
-                    PEB('windowScroll');
+                    EPB('windowScroll');
                 }, 150);
             };
 
         $(w).resize(bouncedResize).scroll(bouncedScroll);
     }());
-}(window, jQuery, PriorityEventBroadcaster));
+}(window, jQuery, EventPriorityBroadcaster));
