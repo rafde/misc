@@ -1,5 +1,4 @@
-/*global EventPriorityBroadcaster, Ctrl*/
-var SliderStrip = (function (Ctrl, $, EPB) {
+var SliderStrip = (function (Ctrl, $, PEB) {
     'use strict';
 	//Private functions and vars
 	var SliderStrip,
@@ -245,7 +244,7 @@ var SliderStrip = (function (Ctrl, $, EPB) {
 					}
 				}
 			},
-			'__init' : function () {
+			__init : function () {
 				sliderDebug(this._ctrlName + ' init');
 
 				var htmlStr = '',
@@ -293,7 +292,7 @@ var SliderStrip = (function (Ctrl, $, EPB) {
 					this.$trackWrap = this.$slideTrack.wrap(htmlStr).parent();
 				}
 			},
-			'__postInit' : function () {
+			__postInit : function () {
 				var $selected = this.$slideTrack.children('.selected');
 
 				this._updateValues();
@@ -304,7 +303,7 @@ var SliderStrip = (function (Ctrl, $, EPB) {
 					this._updateInteractions();
 				}
 			},
-			'configure' : function () {
+			configure : function () {
 				var $sliderStrip = this.$root,
 					htmlStr,
 					$temp;
@@ -352,7 +351,7 @@ var SliderStrip = (function (Ctrl, $, EPB) {
 			'_onEnabled': function () {
 				this.directionToPage(this._pageIndex, false, true);
 			},
-			'directionToPage' : function (direction, useAnim, force) {
+			directionToPage : function (direction, useAnim, force) {
 				sliderDebug('Direction to go:' + direction);
 				var pageOffset = direction;
 
@@ -393,7 +392,7 @@ var SliderStrip = (function (Ctrl, $, EPB) {
 				_updatePos.apply(this, [pageOffset, useAnim]);
 				return true;
 			},
-			'resetTrack' : function () {
+			resetTrack : function () {
 				this.directionToPage(0, false);
 				this.updateTrack();
 			},
@@ -516,8 +515,8 @@ var SliderStrip = (function (Ctrl, $, EPB) {
 				'Sliding' : [
 					{
 						'tag' : 'defaultSlideAction',
-						'timing' : 1,
-						'sub': function (obj) {
+						'timing' : 'default',
+						'callback': function (obj) {
 							obj.Ctrl.directionToPage(obj.num);
 						}
 					}
@@ -525,8 +524,8 @@ var SliderStrip = (function (Ctrl, $, EPB) {
 				'SelectSlide' : [
 					{
 						'tag' : 'selecting',
-						'timing' : 0,
-						'sub': function (obj) {
+						'timing' : 'pre',
+						'callback': function (obj) {
 							if (!obj.isSame) {
 								obj.$oldSlide.removeClass('selected');
 								obj.$currentTarget.addClass('selected');
@@ -536,8 +535,8 @@ var SliderStrip = (function (Ctrl, $, EPB) {
 				],
 				'TransitionEnd' : [
 					{
-						'timing' : 1,
-						'sub': function (obj) {
+						'timing' : 'default',
+						'callback': function (obj) {
 							obj.$delegateTarget.removeClass(animationClass);
 						}
 					}
@@ -550,11 +549,11 @@ var SliderStrip = (function (Ctrl, $, EPB) {
 
 	$(document).ready(function () {
 
-        EPB('windowResize', {
+        PEB('windowResize', {
 			'tag' : 'adjustSliderStrip',
-			'sub' : _adjustSliderStrip
+			'callback' : _adjustSliderStrip
 		});
 	});
 
     return SliderStrip;
-}(Ctrl, jQuery, EventPriorityBroadcaster));
+}(Ctrl, jQuery, PriorityEventBroadcaster));
