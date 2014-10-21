@@ -1,4 +1,0 @@
-EventPriorityBroadCaster
-========================
-
-Work in progress
